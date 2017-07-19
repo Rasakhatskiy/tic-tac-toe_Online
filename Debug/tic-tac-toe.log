@@ -1,0 +1,5 @@
+﻿  main.cpp
+d:\prog\tic tac toe\tic-tac-toe\main.cpp(105): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+d:\prog\tic tac toe\tic-tac-toe\main.cpp(214): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+  tic-tac-toe.vcxproj -> D:\prog\tic tac toe\tic-tac-toe\Debug\tic-tac-toe.exe
+  tic-tac-toe.vcxproj -> D:\prog\tic tac toe\tic-tac-toe\Debug\tic-tac-toe.pdb (Partial PDB)
