@@ -86,22 +86,25 @@ bool turner(int a, int b) {
 	return false;
 }
 
-bool diap200x200(Vector2f pos, int x, int y) {
-	if (pos.x >= x * 200 && pos.x < x * 200 + 200 &&
-		pos.y >= y * 200 && pos.y < y * 200 + 200) {
-		if (turner(x, y)) {
-			toSendX = x;
-			toSendY = y;
-			return true;
+bool diap200x200(Vector2f pos) {
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (pos.x >= i * 200 && pos.x < i * 200 + 200 &&
+				pos.y >= j * 200 && pos.y < j * 200 + 200) {
+				if (turner(j, i)) {
+					toSendX = j;
+					toSendY = i;
+					return true;
+				}
+			}
 		}
 	}
-	else
-		return false;
+	return false;
 }
 
 char inputFromKeybord() {
 	char t = ' ';
-	if (clickTimer > 100) {
+	if (clickTimer > 150) {
 		if (Keyboard::isKeyPressed(Keyboard::Num1) || Keyboard::isKeyPressed(Keyboard::Numpad1)) {
 			t = '1';
 			clickTimer = 0;

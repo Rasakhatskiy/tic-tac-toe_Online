@@ -39,5 +39,5 @@ void drawTable(RenderWindow &window);
 void menu(RenderWindow &window);
 bool turner(int a, int b);
 void twoPlayers(RenderWindow &window);
-bool diap200x200(Vector2f mouse, int x, int y);
+bool diap200x200(Vector2f mouse);
 char inputFromKeybord();
