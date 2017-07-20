@@ -1,3 +1,4 @@
-﻿  globals.cpp
+﻿  Online.cpp
+d:\prog\tic-tac-toe\online.cpp(23): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
   tic-tac-toe.vcxproj -> D:\prog\tic-tac-toe\Debug\tic-tac-toe.exe
   tic-tac-toe.vcxproj -> D:\prog\tic-tac-toe\Debug\tic-tac-toe.pdb (Partial PDB)

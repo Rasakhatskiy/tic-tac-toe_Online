@@ -7,6 +7,9 @@ using namespace sf;
 char gameField[3][3];
 char winner;
 
+int toSendX;
+int toSendY;
+
 bool turn;//true == X, false == O
 bool gameOver;
 
@@ -26,7 +29,6 @@ Font orange_juice;
 IpAddress ipGlobal, ipLocal;
 
 void set() {
-	//gameField[3][3] = { ' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
 	reset();
 	winner = ' ';
 	turn = true;//true == X, false == O
@@ -149,7 +151,7 @@ void set() {
 	input.setString("");
 	input.setPosition(100, 200);
 }
-
+//load textures, fonts, set sprites etc.
 void loadFiles() {
 	fieldTex.loadFromFile("Images/field.png");
 	Xtex.loadFromFile("Images/X.png");

@@ -7,7 +7,7 @@ using namespace sf;
 
 
 
-
+//main menu of the game
 void menu(RenderWindow &window) {
 	Clock clock;
 	clickTimer = 0;
@@ -109,7 +109,7 @@ void menu(RenderWindow &window) {
 				window.draw(createSText);
 				if (Mouse::isButtonPressed(Mouse::Left)) {
 					clickTimer = 0;
-					//onlineGame(window, 's');
+					choose(window, 's');
 				}
 			}
 			else {
@@ -123,7 +123,7 @@ void menu(RenderWindow &window) {
 				window.draw(joinSText);
 				if (Mouse::isButtonPressed(Mouse::Left)) {
 					clickTimer = 0;
-					//onlineGame(window, 'c');
+					choose(window, 'c');
 				}
 			}
 			else {

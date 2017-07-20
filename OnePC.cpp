@@ -65,19 +65,13 @@ void twoPlayers(RenderWindow &window) {
 					if (pos.x >= 400 && pos.x < 600 && pos.y >= 400 && pos.y < 600)
 						turner(2, 2);
 
-
-					for (int i = 0; i < 3; i++) {
-						//std::cout << std::endl;
-						for (int j = 0; j < 3; j++) {
-							//std::cout << arr[i][j] << " ";
-						}
-					}
 					winner = check();
 
 					clickTimer = 0;
 				}
 			}
 		}
+
 		if (winner == 'x') {
 			window.draw(ramaSprite);
 			window.draw(RedWinText);

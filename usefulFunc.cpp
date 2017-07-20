@@ -5,7 +5,7 @@
 using namespace sf;
 
 
-
+//checks if the game ands ant who win
 char check() {
 	for (int i = 0; i < 3; i++) {
 		if (gameField[i][0] != ' ')
@@ -36,6 +36,7 @@ char check() {
 	return ' ';
 }
 
+//draws gameField at the window
 void drawTable(RenderWindow &window) {
 	float w, h;
 	for (int i = 0; i < 3; i++) {
@@ -61,6 +62,7 @@ void drawTable(RenderWindow &window) {
 	}
 }
 
+//erase gamefield and winner
 void reset() {
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
@@ -70,6 +72,7 @@ void reset() {
 	clickTimer = 0;
 }
 
+//check if move is possible(true), fill symbols, change turn
 bool turner(int a, int b) {
 	if (a < 0 || b < 0 || a > 2 || b > 2) {
 		return false;
@@ -81,4 +84,17 @@ bool turner(int a, int b) {
 		return true;
 	}
 	return false;
+}
+
+bool diap200x200(Vector2f pos, int x, int y) {
+	if (pos.x >= x * 200 && pos.x < x * 200 + 200 &&
+		pos.y >= y * 200 && pos.y < y * 200 + 200) {
+		if (turner(x, y)) {
+			toSendX = x;
+			toSendY = y;
+			return true;
+		}
+	}
+	else
+		return false;
 }
