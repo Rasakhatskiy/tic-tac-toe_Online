@@ -126,7 +126,65 @@ void runServer(RenderWindow &window) {
 	}
 }
 void runClient(RenderWindow &window) {
+	clickTimer = 0;
+	TcpSocket socket;
+	socket.setBlocking(false);
 
+	RectangleShape shape(Vector2f(600, 600));
+	shape.setFillColor(Color::White);
+
+	bool connected = false;
+	std::string s;
+
+	Clock clock;
+	while (window.isOpen()) {
+		window.draw(shape);
+		float time = clock.getElapsedTime().asMicroseconds();
+		clock.restart();
+		time = time / 900;
+		clickTimer += time;
+
+
+		sf::Event Event;
+		while (window.pollEvent(Event))
+		{
+			if (Event.type == sf::Event::Closed)
+				window.close();
+			if (Keyboard::isKeyPressed(Keyboard::R))
+				reset();
+			if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+				reset();
+				menu(window);
+			}
+
+		}
+
+		if (connected) {
+
+		}
+		if (!connected) {
+			window.draw(helpText);
+			window.draw(help2Text);
+			window.draw(input);
+			char t = inputFromKeybord();
+			if (t != ' ')
+				s += t;
+			input.setString(s);
+			if (Keyboard::isKeyPressed(Keyboard::BackSpace)) {
+				if (s.size() > 0) {
+					s.pop_back();
+					clickTimer = 0;
+				}
+			}
+		}
+
+
+		Vector2i pixelPos = Mouse::getPosition(window);
+		Vector2f pos = window.mapPixelToCoords(pixelPos);
+
+		window.display();
+		window.clear();
+	}
 }
 
 //client or server side

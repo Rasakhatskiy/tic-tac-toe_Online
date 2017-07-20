@@ -98,3 +98,54 @@ bool diap200x200(Vector2f pos, int x, int y) {
 	else
 		return false;
 }
+
+char inputFromKeybord() {
+	char t = ' ';
+	if (clickTimer > 100) {
+		if (Keyboard::isKeyPressed(Keyboard::Num1) || Keyboard::isKeyPressed(Keyboard::Numpad1)) {
+			t = '1';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num2) || Keyboard::isKeyPressed(Keyboard::Numpad2)) {
+			t = '2';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num3) || Keyboard::isKeyPressed(Keyboard::Numpad3)) {
+			t = '3';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num4) || Keyboard::isKeyPressed(Keyboard::Numpad4)) {
+			t = '4';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num5) || Keyboard::isKeyPressed(Keyboard::Numpad5)) {
+			t = '5';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num6) || Keyboard::isKeyPressed(Keyboard::Numpad6)) {
+			t = '6';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num7) || Keyboard::isKeyPressed(Keyboard::Numpad7)) {
+			t = '7';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num8) || Keyboard::isKeyPressed(Keyboard::Numpad8)) {
+			t = '8';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num9) || Keyboard::isKeyPressed(Keyboard::Numpad9)) {
+			t = '9';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Num0) || Keyboard::isKeyPressed(Keyboard::Numpad0)) {
+			t = '0';
+			clickTimer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Period) || Keyboard::isKeyPressed(Keyboard::Delete)) {
+			t = '.';
+			clickTimer = 0;
+		}
+	}
+	return t;
+}

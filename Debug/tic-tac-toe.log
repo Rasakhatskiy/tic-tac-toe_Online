@@ -1,4 +1,4 @@
-﻿  Online.cpp
-d:\prog\tic-tac-toe\online.cpp(23): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+﻿  usefulFunc.cpp
+d:\prog\tic-tac-toe\usefulfunc.cpp(100): warning C4715: diap200x200: значение возвращается не при всех путях выполнения
   tic-tac-toe.vcxproj -> D:\prog\tic-tac-toe\Debug\tic-tac-toe.exe
   tic-tac-toe.vcxproj -> D:\prog\tic-tac-toe\Debug\tic-tac-toe.pdb (Partial PDB)
