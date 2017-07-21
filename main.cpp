@@ -152,7 +152,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(600, 600, 32), "Tic-Tac toe");
 	reset();
 	winner = ' ';
-	turn = true;//true == X, false == O
+	twoPlayersTurn = true;//true == X, false == O
 	gameOver = false;
 	clickTimer = 0;//clickDelay
 	menu(window);

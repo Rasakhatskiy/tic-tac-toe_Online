@@ -1,7 +1,5 @@
-﻿  usefulFunc.cpp
-  Online.cpp
-d:\prog\tic-tac-toe\online.cpp(24): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-d:\prog\tic-tac-toe\online.cpp(144): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-  Создание кода...
+﻿  Online.cpp
+d:\prog\tic-tac-toe\online.cpp(26): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+d:\prog\tic-tac-toe\online.cpp(148): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
   tic-tac-toe.vcxproj -> D:\prog\tic-tac-toe\Debug\tic-tac-toe.exe
   tic-tac-toe.vcxproj -> D:\prog\tic-tac-toe\Debug\tic-tac-toe.pdb (Partial PDB)

@@ -38,6 +38,8 @@ char check() {
 
 //draws gameField at the window
 void drawTable(RenderWindow &window) {
+	window.clear();
+	window.draw(fieldSpr);
 	float w, h;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -78,9 +80,9 @@ bool turner(int a, int b) {
 		return false;
 	}
 	if (gameField[a][b] == ' ') {
-		if (turn)gameField[a][b] = 'x';
+		if (twoPlayersTurn)gameField[a][b] = 'x';
 		else gameField[a][b] = 'o';
-		turn = !turn;
+		twoPlayersTurn = !twoPlayersTurn;
 		return true;
 	}
 	return false;

@@ -12,7 +12,7 @@ extern char winner;//x , o or Tie (t)
 extern int toSendX;
 extern int toSendY;
 
-extern bool turn;//true == X, false == O
+extern bool twoPlayersTurn;//true == X, false == O
 extern bool gameOver;//true if game ends
 
 extern float clickTimer;//clickDelay, without it mouse and keyboard clicks too many times

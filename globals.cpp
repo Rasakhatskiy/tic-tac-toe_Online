@@ -10,7 +10,7 @@ char winner;
 int toSendX;
 int toSendY;
 
-bool turn;//true == X, false == O
+bool twoPlayersTurn;//true == X, false == O
 bool gameOver;
 
 float clickTimer;//clickDelay
@@ -31,7 +31,7 @@ IpAddress ipGlobal, ipLocal;
 void set() {
 	reset();
 	winner = ' ';
-	turn = true;//true == X, false == O
+	twoPlayersTurn = true;//true == X, false == O
 	gameOver = false;
 	clickTimer = 0;//clickDelay
 

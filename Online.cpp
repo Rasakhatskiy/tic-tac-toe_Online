@@ -4,6 +4,8 @@
 #include "globals.h"
 using namespace sf;
 
+const bool setBlock = false;
+
 void runServer(RenderWindow &window) {
 	clickTimer = 0;
 	TcpSocket socket;
@@ -28,8 +30,7 @@ void runServer(RenderWindow &window) {
 
 
 		sf::Event Event;
-		while (window.pollEvent(Event))
-		{
+		while (window.pollEvent(Event)){
 			if (Event.type == sf::Event::Closed)
 				window.close();
 			if (Keyboard::isKeyPressed(Keyboard::R))
@@ -45,9 +46,9 @@ void runServer(RenderWindow &window) {
 		Vector2f pos = window.mapPixelToCoords(pixelPos);
 
 		if (connected) {
+			socket.setBlocking(setBlock);
 			Vector2i pixelPos = Mouse::getPosition(window);
 			Vector2f pos = window.mapPixelToCoords(pixelPos);//position of the mouse
-			window.draw(fieldSpr);
 			drawTable(window);
 			//if server turn
 			if (turn) {
@@ -64,21 +65,24 @@ void runServer(RenderWindow &window) {
 					std::cout << "done\n";
 					turn = false;
 					p.clear();
+					//
 					p << toSendX << toSendY;
-					socket.send(p);
-					done = false;
+					if (socket.send(p) == Socket::Done) {
+						done = false;
+					}
 				}
 			}
-
+			drawTable(window);
 			//if client turn
 			if(!turn) {
 				//todo
 				int tx, ty;
 				p.clear();
-				socket.receive(p);
-				p >> tx >> ty;
-				turner(tx, ty);
-				turn = true;
+				if (socket.receive(p) == Socket::Done) {
+					p >> tx >> ty;
+					turner(tx, ty);
+					turn = true;
+				}
 			}
 			if (winner == 'x') {
 				window.draw(ramaSprite);
@@ -111,15 +115,15 @@ void runServer(RenderWindow &window) {
 		if (!connected) {
 			window.draw(waitScreenText);
 			if (listener.accept(socket) == sf::Socket::Done){
-				connected = true;
 				std::cout << "connected\n";
+				std::string temp = "start";
+				p << temp;
+				if (socket.send(p) == Socket::Done) {
+					std::cout << "Ready for play!\n";
+					connected = true;
+				}
 			}
 		}
-
-
-
-
-		
 
 		window.display();
 		window.clear();
@@ -128,7 +132,7 @@ void runServer(RenderWindow &window) {
 void runClient(RenderWindow &window) {
 	clickTimer = 0;
 	TcpSocket socket;
-	socket.setBlocking(false);
+	socket.setBlocking(setBlock);
 	IpAddress ip;
 	RectangleShape shape(Vector2f(600, 600));
 	shape.setFillColor(Color::White);
@@ -148,8 +152,7 @@ void runClient(RenderWindow &window) {
 
 
 		sf::Event Event;
-		while (window.pollEvent(Event))
-		{
+		while (window.pollEvent(Event)){
 			if (Event.type == sf::Event::Closed)
 				window.close();
 			if (Keyboard::isKeyPressed(Keyboard::R))
@@ -162,9 +165,9 @@ void runClient(RenderWindow &window) {
 		}
 
 		if (connected) {
+			socket.setBlocking(setBlock);
 			Vector2i pixelPos = Mouse::getPosition(window);
 			Vector2f pos = window.mapPixelToCoords(pixelPos);//position of the mouse
-			window.draw(fieldSpr);
 			drawTable(window);
 			//if client turn
 			if (!turn) {
@@ -182,20 +185,22 @@ void runClient(RenderWindow &window) {
 					turn = true;
 					p.clear();
 					p << toSendX << toSendY;
-					socket.send(p);
-					done = false;
+					if (socket.send(p) == Socket::Done)
+						done = false;//
 				}
 			}
-
+			drawTable(window);
 			//if server turn
 			if (turn) {
 				//todo
 				int tx, ty;
 				p.clear();
-				socket.receive(p);
-				p >> tx >> ty;
-				turner(tx, ty);
-				turn = false;
+				if (socket.receive(p) == Socket::Done) {
+					p >> tx >> ty;
+					turner(tx, ty);
+					turn = false;
+				}
+				
 			}
 			if (winner == 'x') {
 				window.draw(ramaSprite);
@@ -240,13 +245,23 @@ void runClient(RenderWindow &window) {
 						clickTimer = 0;
 					}
 				}
+				if (Keyboard::isKeyPressed(Keyboard::Up)) {
+					s = "127.0.0.1";
+				}
 				if (Keyboard::isKeyPressed(Keyboard::Return)) {
+					clickTimer = 0;
 					ip = s;
 					socket.connect(ip, PORT);
-					connected = true;
-					std::cout << "connected!";
-
-					clickTimer = 0;
+					std::cout << "connected!\n";
+					while (!connected) {
+						socket.receive(p);
+						std::string temp;
+						p >> temp;
+						if (temp == "start") {
+							connected = true;
+							std::cout << "Ready to begin!";
+						}
+					}
 				}
 			}
 			

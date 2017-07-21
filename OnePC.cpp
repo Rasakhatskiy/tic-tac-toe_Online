@@ -41,7 +41,7 @@ void twoPlayers(RenderWindow &window) {
 		if (clickTimer > 200) {
 			if (Mouse::isButtonPressed(Mouse::Left)) {
 				if (!gameOver) {
-					if (turn) turnc = 'x';
+					if (twoPlayersTurn) turnc = 'x';
 					else turnc = 'o';
 
 					if (pos.x >= 0 && pos.x < 200 && pos.y >= 0 && pos.y < 200)
