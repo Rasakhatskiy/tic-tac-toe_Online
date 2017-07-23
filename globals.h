@@ -26,10 +26,13 @@ okText,
 BlueWinText, RedWinText, TieText,
 optionsText,
 createSText, joinSText, waitScreenText,
-helpText, help2Text, input, disconText;
+helpText, help2Text, input, disconText, waitingText,
+yourTurn, opponentTurn;
 //Top font
 extern Font orange_juice;
 extern IpAddress ipGlobal, ipLocal;
+
+extern RectangleShape shape;
 
 char check();
 void reset();

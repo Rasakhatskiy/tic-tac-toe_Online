@@ -11,6 +11,7 @@ void runServer(RenderWindow &window) {
 	TcpSocket socket;
 	TcpListener listener;
 	std::string stat = "n";
+	std::string readyForNextGame = "NO";
 	socket.setBlocking(false);
 	listener.setBlocking(false);
 	Packet p;
@@ -19,8 +20,6 @@ void runServer(RenderWindow &window) {
 	bool done = false;
 	bool toDiscon = false;
 
-	RectangleShape shape(Vector2f(600, 600));
-	shape.setFillColor(Color::White);
 	listener.listen(PORT);
 	Clock clock;
 	while (window.isOpen()) {
@@ -79,8 +78,9 @@ void runServer(RenderWindow &window) {
 						done = false;
 					}
 				}
+				window.draw(yourTurn);
 			}
-			drawTable(window);
+			//drawTable(window);
 			//if client turn
 			if(!turn) {
 				//todo
@@ -91,6 +91,7 @@ void runServer(RenderWindow &window) {
 					turner(tx, ty);
 					turn = true;
 				}
+				window.draw(opponentTurn);
 			}
 			if (winner == 'x') {
 				window.draw(ramaSprite);
@@ -108,11 +109,36 @@ void runServer(RenderWindow &window) {
 				gameOver = true;
 			}
 			if (gameOver) {
+				if (turn) {
+					if (socket.receive(p) == Socket::Done) {
+						p >> readyForNextGame;
+					}
+					std::cout << readyForNextGame;
+					if (readyForNextGame == "OK") {
+						if (pos.x >= 250 && pos.x < 315 && pos.y >= 300 && pos.y < 350) {
+							if (Mouse::isButtonPressed(Mouse::Left)) {
+								readyForNextGame = "NO";
+								reset();
+							}
+						}
+					}
+					else {
+						window.draw(waitingText);
+					}
+				}
+				if (!turn) {
+					std::string temps = "OK";
+					p << temps;
+					
+					if (pos.x >= 250 && pos.x < 315 && pos.y >= 300 && pos.y < 350)
+						if (Mouse::isButtonPressed(Mouse::Left))
+							if (socket.send(p) == Socket::Done) {
+								reset();
+							}
+				}
 				if (pos.x >= 250 && pos.x < 315 && pos.y >= 300 && pos.y < 350) {
 					okText.setColor(Color(255, 144, 0));
 					window.draw(okText);
-					if (Mouse::isButtonPressed(Mouse::Left))
-						reset();
 				}
 				else {
 					okText.setColor(Color::Blue);
@@ -146,8 +172,6 @@ void runClient(RenderWindow &window) {
 	TcpSocket socket;
 	socket.setBlocking(setBlock);
 	IpAddress ip;
-	RectangleShape shape(Vector2f(600, 600));
-	shape.setFillColor(Color::White);
 	bool turn = true;//true - server, false - client
 	bool connected = false;
 	bool done = false;
@@ -155,7 +179,7 @@ void runClient(RenderWindow &window) {
 	std::string stat;
 	Packet p;
 	std::string s;
-
+	std::string readyForNextGame = "NO";
 	Clock clock;
 	while (window.isOpen()) {
 		window.draw(shape);
@@ -201,8 +225,9 @@ void runClient(RenderWindow &window) {
 					if (socket.send(p) == Socket::Done)
 						done = false;//
 				}
+				window.draw(yourTurn);
 			}
-			drawTable(window);
+			//drawTable(window);
 			//if server turn
 			if (turn) {
 				//todo
@@ -217,7 +242,7 @@ void runClient(RenderWindow &window) {
 					turner(tx, ty);
 					turn = false;
 				}
-				
+				window.draw(opponentTurn);
 			}
 			if (winner == 'x') {
 				window.draw(ramaSprite);
@@ -235,11 +260,34 @@ void runClient(RenderWindow &window) {
 				gameOver = true;
 			}
 			if (gameOver) {
+				if (!turn){
+					if (socket.receive(p) == Socket::Done) {
+						p >> readyForNextGame;
+					}
+					std::cout << readyForNextGame;
+					if (readyForNextGame == "OK") {
+						if (pos.x >= 250 && pos.x < 315 && pos.y >= 300 && pos.y < 350) {
+							if (Mouse::isButtonPressed(Mouse::Left)) {
+								readyForNextGame = "NO";
+								reset();
+							}
+						}
+					}
+					else {
+						window.draw(waitingText);
+					}
+				}
+				if (turn) {
+					std::string temps = "OK";
+					p << temps;
+					if (pos.x >= 250 && pos.x < 315 && pos.y >= 300 && pos.y < 350)
+						if (Mouse::isButtonPressed(Mouse::Left))
+							if (socket.send(p) == Socket::Done)
+								reset();
+				}
 				if (pos.x >= 250 && pos.x < 315 && pos.y >= 300 && pos.y < 350) {
 					okText.setColor(Color(255, 144, 0));
 					window.draw(okText);
-					if (Mouse::isButtonPressed(Mouse::Left))
-						reset();
 				}
 				else {
 					okText.setColor(Color::Blue);

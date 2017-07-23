@@ -23,10 +23,13 @@ okText,
 BlueWinText, RedWinText, TieText,
 optionsText,
 createSText, joinSText, waitScreenText,
-helpText, help2Text, input, disconText;
+helpText, help2Text, input, disconText, waitingText,
+yourTurn, opponentTurn;
 
 Font orange_juice;
 IpAddress ipGlobal, ipLocal;
+
+RectangleShape shape;
 
 void set() {
 	reset();
@@ -158,6 +161,28 @@ void set() {
 	input.setCharacterSize(size);
 	input.setString("");
 	input.setPosition(100, 200);
+
+	
+	waitingText.setFont(orange_juice);
+	waitingText.setColor(Color::Black);
+	waitingText.setCharacterSize(size);
+	waitingText.setString("Waiting for your opponent...");
+	waitingText.setPosition(10, 640);
+
+	yourTurn.setFont(orange_juice);
+	yourTurn.setColor(Color::Black);
+	yourTurn.setCharacterSize(size);
+	yourTurn.setString("Your turn");
+	yourTurn.setPosition(10, 600);
+
+	opponentTurn.setFont(orange_juice);
+	opponentTurn.setColor(Color::Black);
+	opponentTurn.setCharacterSize(size);
+	opponentTurn.setString("Opponent turn");
+	opponentTurn.setPosition(10, 600);
+
+	shape.setSize(Vector2f(600, 700));
+	shape.setFillColor(Color::White);
 }
 //load textures, fonts, set sprites etc.
 void loadFiles() {

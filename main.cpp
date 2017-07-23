@@ -12,9 +12,6 @@ void menu(RenderWindow &window) {
 	Clock clock;
 	clickTimer = 0;
 	int menulvl = 1;
-	RectangleShape whiteS;
-	whiteS.setSize(Vector2f(600, 600));
-	whiteS.setFillColor(Color::White);
 	while (window.isOpen()) {
 		float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
@@ -142,14 +139,14 @@ void menu(RenderWindow &window) {
 
 		window.display();
 		window.clear();
-		window.draw(whiteS);
+		window.draw(shape);
 	}
 }
 
 int main()
 {
 	loadFiles();
-	sf::RenderWindow window(sf::VideoMode(600, 600, 32), "Tic-Tac toe");
+	sf::RenderWindow window(sf::VideoMode(600, 700, 32), "Tic-Tac toe");
 	reset();
 	winner = ' ';
 	twoPlayersTurn = true;//true == X, false == O
