@@ -1,4 +1,4 @@
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //hide console
+//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //hide console
 #include <SFML\Graphics.hpp>
 #include <SFML\Network.hpp>
 #include <iostream>

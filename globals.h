@@ -26,7 +26,7 @@ okText,
 BlueWinText, RedWinText, TieText,
 optionsText,
 createSText, joinSText, waitScreenText,
-helpText, help2Text, input;
+helpText, help2Text, input, disconText;
 //Top font
 extern Font orange_juice;
 extern IpAddress ipGlobal, ipLocal;

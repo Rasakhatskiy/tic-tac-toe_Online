@@ -23,7 +23,7 @@ okText,
 BlueWinText, RedWinText, TieText,
 optionsText,
 createSText, joinSText, waitScreenText,
-helpText, help2Text, input;
+helpText, help2Text, input, disconText;
 
 Font orange_juice;
 IpAddress ipGlobal, ipLocal;
@@ -132,6 +132,14 @@ void set() {
 	waitScreenText.setString("Waiting For Conection...\nGlobal IP : " + g
 		+ "\nLocal IP :" + l
 		+ "\n\nPort : " + std::to_string(PORT));
+
+
+	
+	disconText.setFont(orange_juice);
+	disconText.setColor(Color::Magenta);
+	disconText.setCharacterSize(size);
+	disconText.setString("You have been disconnected...");
+	disconText.setPosition(100, 200);
 
 	helpText.setFont(orange_juice);
 	helpText.setColor(Color::Blue);
